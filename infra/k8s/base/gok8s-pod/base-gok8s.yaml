@@ -1,0 +1,31 @@
+# The namesapce 
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gok8s-system
+# the deployment and the POD
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gok8s-depl
+  namespace: gok8s-system
+spec:
+  selector:
+    matchLabels:
+      app: gok8s-pod
+  template:
+    metadata:
+      labels:
+        app: gok8s-pod
+    spec:
+      # base networking spec 
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      terminationGracePeriodSeconds: 60
+      # pointing to the image we created
+      containers:
+      - name: gok8s-pod
+        image: go-k8s-img:1.0
+
+
