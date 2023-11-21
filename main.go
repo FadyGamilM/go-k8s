@@ -11,7 +11,7 @@ import (
 var build = "development"
 
 func main() {
-	log.Printf("starting the service on %v .. \n", build)
+	log.Printf("starting the backend service on %v .. \n", build)
 	defer log.Println("server is ended .. ")
 
 	shutdown := make(chan os.Signal, 1)
