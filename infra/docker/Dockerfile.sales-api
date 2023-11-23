@@ -6,6 +6,8 @@ WORKDIR /gok8s/app/services/sales-api
 
 COPY go.mod /gok8s/app/services/sales-api
 
+COPY go.sum /gok8s/app/services/sales-api/
+
 RUN go mod download
 
 COPY ./app/services/sales-api /gok8s/app/services/sales-api

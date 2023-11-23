@@ -26,6 +26,6 @@ spec:
       # pointing to the image we created
       containers:
       - name: sales-api-pod
-        image: sales-api-img:1.0
+        image: sales-api-image
 
 

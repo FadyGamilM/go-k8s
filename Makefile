@@ -5,6 +5,11 @@ run-sales-api:
 
 VERSION := 1.0
 
+# ===============================
+go-get:
+	go mod tidy
+	go mod vendor
+
 # ============================= To build docker container out of the service ===================================
 all: sales-api
 
@@ -44,6 +49,9 @@ kind-status:
 # load our local image into the kind environment 
 # anytime we change the image we have to reload it into the kind environment
 kind-load:
+# override the variables inside the kustomization.yaml file 
+	cd infra/k8s/kind/sales-api-pod; kustomize edit set image sales-api-image=sales-api-img:$(VERSION)
+# then load the image to cluster node
 	kind load docker-image sales-api-img:$(VERSION) --name $(KIND_CLUSTER)
 
 
@@ -68,3 +76,7 @@ kind-apply-kustomize:
 	kustomize build infra/k8s/kind/gok8s-pod | kubectl apply -f -
 
 kind-update-apply-kustomize: all kind-load kind-apply-kustomize
+
+# print the last patched yaml file 
+kind-show-kustomized-depl:
+	kustomize build infra/k8s/kind/sales-api-pod

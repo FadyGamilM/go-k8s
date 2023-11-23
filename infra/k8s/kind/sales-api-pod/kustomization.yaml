@@ -1,0 +1,10 @@
+# kustomization file is just a mechanism to point to the yaml file we need to customize
+resources:
+- ../../base/sales-api-pod
+patches:
+- path: kind-sales-api-patch.yaml
+# hey kustomize, if you see this name, replace it with this newName and tag 
+images:
+- name: sales-api-image
+  newName: sales-api-img
+  newTag: "1.0"

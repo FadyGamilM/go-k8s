@@ -1,4 +1,0 @@
-# kustomization file is just a mechanism to point to the yaml file we need to customize
-resources:
-- base-gok8s.yaml
-
