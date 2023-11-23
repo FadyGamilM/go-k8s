@@ -48,7 +48,8 @@ kind-load:
 
 
 # kustomize will produce a yaml file to apply it to the kubectl tooling 
-kind-apply:
+kind-apply-base:
+# kustomize build infra/k8s/kind/gok8s-pod | kubectl apply -f -
 	kubectl apply -f ./infra/k8s/base/gok8s-pod/base-gok8s.yaml
 
 kind-logs:
@@ -59,3 +60,11 @@ kind-restart:
 
 # to notice that we have a change in the image so we have to build, then load the newely built image in the cluster, and finally restart the image 
 kind-update: all kind-load kind-restart
+
+
+kind-update-apply-base: all kind-load kind-apply-base
+
+kind-apply-kustomize: 
+	kustomize build infra/k8s/kind/gok8s-pod | kubectl apply -f -
+
+kind-update-apply-kustomize: all kind-load kind-apply-kustomize

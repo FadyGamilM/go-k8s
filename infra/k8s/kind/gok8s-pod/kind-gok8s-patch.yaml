@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sales-api-depl
+  namespace: gok8s-system
+spec:
+  # we need in this current phase to use one replica
+  #! WHY THIS FILE IS NOT IN THE BASE ??
+  #* => because i don't want the base to be one replica, each environment has its own preferences, the dev might need 1 but the prod might needs more replicase and different strategy
+  replicas: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: sales-api-pod
+  template:
+    metadata:
+      labels:
+        app: sales-api-pod
+    spec:
+      containers:
+      - name: sales-api-pod
+        image: sales-api-img:1.0
+        # ==> Limits the usage of my 4 full core cpus
+        # ==> i got to run 2 go routines in parallel with the following limits 
+        resources:
+          #! 2.if it needs more than one go with the max which is 2 full cpus core
+          limits:
+            cpu: "2000n"
+          #! 1.starts with one cpu full core 
+          requests:
+            cpu: "1000n"

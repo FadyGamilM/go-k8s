@@ -1,4 +1,5 @@
 # kustomization file is just a mechanism to point to the yaml file we need to customize
 resources:
-- base-gok8s.yaml
-
+- ../../base/gok8s-pod
+patches:
+- path: kind-gok8s-patch.yaml
