@@ -68,3 +68,5 @@ NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE    SELECTOR
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2m7s   <none>
 ➜ go-k8s git:(working-with-kind)
 ```
+
+## Setting quotas for development environment 
