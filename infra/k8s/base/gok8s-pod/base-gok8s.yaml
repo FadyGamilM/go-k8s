@@ -8,16 +8,16 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gok8s-depl
+  name: sales-api-depl
   namespace: gok8s-system
 spec:
   selector:
     matchLabels:
-      app: gok8s-pod
+      app: sales-api-pod
   template:
     metadata:
       labels:
-        app: gok8s-pod
+        app: sales-api-pod
     spec:
       # base networking spec 
       dnsPolicy: ClusterFirstWithHostNet
@@ -25,7 +25,7 @@ spec:
       terminationGracePeriodSeconds: 60
       # pointing to the image we created
       containers:
-      - name: gok8s-pod
-        image: go-k8s-img:1.0
+      - name: sales-api-pod
+        image: sales-api-img:1.0
 
 

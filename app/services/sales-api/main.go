@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"runtime"
 	"syscall"
 )
 
@@ -11,7 +12,10 @@ import (
 var build = "development"
 
 func main() {
-	log.Printf("starting the backend service on %v .. \n", build)
+	// working with quotas of cpus ..
+	cpus := runtime.GOMAXPROCS(0)
+
+	log.Printf("starting the backend service on %v mode, and running with {%v} CPUs in parallel.. \n", build, cpus)
 	defer log.Println("server is ended .. ")
 
 	shutdown := make(chan os.Signal, 1)
